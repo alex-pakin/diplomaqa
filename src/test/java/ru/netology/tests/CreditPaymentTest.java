@@ -1,5 +1,6 @@
 package ru.netology.tests;
 
+import com.codeborne.selenide.Configuration;
 import lombok.val;
 import org.junit.jupiter.api.*;
 import ru.netology.data.DataBaseHelper;
