@@ -5,10 +5,10 @@
 1. Запустить программу Docker Desktop
 2. Склонировать репозиторий с помощью команды **git clone**, используя Git
 3. Открыть склонированный проект в IntelliJ IDEA
-4. Запустить контейнеры, выполнив в терминале IntelliJ IDEA команду **docker-copmose up**
+4. Запустить контейнеры, выполнив в терминале IntelliJ IDEA команду **docker-compose up**
 5. Запустить приложение, выполнив в терминале Intellij IDEA команду:
-- Для БД MySQL: **java -jar ./aqa-shop.jar --spring.datasource.url=jdbc:mysql://localhost:3306/app**
-- Для БД PostgreSQL: **java -jar ./aqa-shop.jar --spring.datasource.url=jdbc:postgresql://localhost:5432/app**
+- Для БД MySQL: **java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar ./artifacts/aqa-shop.jar**
+- Для БД PostgreSQL: **java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar ./artifacts/aqa-shop.jar**
 6. Запустить автотесты, выполнив в терминале Intellij IDEA команду:
 - Для БД MySQL: **./gradlew clean test -D dbUrl=jdbc:mysql://localhost:3306/app**
 - Для БД PostgreSQL: **./gradlew clean test -D dbUrl=jdbc:postgresql://localhost:5432/app**
