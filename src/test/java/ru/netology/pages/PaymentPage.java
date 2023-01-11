@@ -3,7 +3,6 @@ package ru.netology.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.Keys;
 import ru.netology.data.DataBaseHelper;
 import ru.netology.data.DataHelper;
 
@@ -33,17 +32,6 @@ public class PaymentPage {
     private final SelenideElement notificationError = $(".notification_status_error");
 
     public void fillFormPayByCard(DataHelper.Card cardInfo) {
-        mainPage.selectPayByCard();
-        numberField.setValue(cardInfo.getCardNumber());
-        monthField.setValue(cardInfo.getCardMonth());
-        yearField.setValue(cardInfo.getCardYear());
-        holderField.setValue(cardInfo.getCardHolder());
-        CVCField.setValue(cardInfo.getCardCVC());
-        buttonContinue.click();
-    }
-
-    public void fillFormPayByCredit (DataHelper.Card cardInfo) {
-        mainPage.selectPayByCredit();
         numberField.setValue(cardInfo.getCardNumber());
         monthField.setValue(cardInfo.getCardMonth());
         yearField.setValue(cardInfo.getCardYear());
@@ -151,12 +139,4 @@ public class PaymentPage {
         Assertions.assertEquals(expected,actual);
     }
 
-//    public void clearWholeForm() {
-//        numberField.sendKeys(Keys.LEFT_CONTROL + "A");
-//        numberField.sendKeys(Keys.BACK_SPACE);
-//        monthField.doubleClick().sendKeys(Keys.BACK_SPACE);
-//        yearField.doubleClick().sendKeys(Keys.BACK_SPACE);
-//        holderField.doubleClick().sendKeys(Keys.BACK_SPACE);
-//        CVCField.doubleClick().sendKeys(Keys.BACK_SPACE);
-//    }
 }

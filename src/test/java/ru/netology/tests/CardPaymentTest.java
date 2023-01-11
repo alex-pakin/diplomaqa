@@ -6,6 +6,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import ru.netology.data.DataBaseHelper;
 import ru.netology.data.DataHelper;
+import ru.netology.pages.MainPage;
 import ru.netology.pages.PaymentPage;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -13,6 +14,7 @@ import static com.codeborne.selenide.Selenide.open;
 public class CardPaymentTest {
 
     PaymentPage paymentPage = new PaymentPage();
+    MainPage mainPage = new MainPage();
 
     @BeforeEach
     void shouldStart() {
@@ -36,10 +38,11 @@ public class CardPaymentTest {
     }
 
     @Nested
-    class mainPathsCardWithDifferentStatus {
+    class MainPathsCardWithDifferentStatus {
         @Test
         void shouldSuccessPayApprovedCard() {
             var cardInfo = DataHelper.getValidAcceptedCardInfo();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.approvedPayment(),
@@ -51,6 +54,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayDeclinedCard() {
             var cardInfo = DataHelper.getValidDeclinedCardInfo();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.declinedPayment(),
@@ -61,10 +65,11 @@ public class CardPaymentTest {
     }
 
     @Nested
-    class invalidCardNumberField{
+    class InvalidCardNumberField{
         @Test
         void shouldFailPayEmptyField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithEmptyNumber();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
@@ -75,6 +80,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayOneDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithOneDigitNumber();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
@@ -85,6 +91,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayThreeDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithThreeDigitNumber();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
@@ -95,6 +102,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayFifteenDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithFifteenDigitNumber();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
@@ -105,6 +113,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayUnregisteredCard() {
             var cardInfo = DataHelper.getInvalidCardInfoIfCardIsNotRegisteredInBase();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldRejectedPay(),
@@ -115,10 +124,11 @@ public class CardPaymentTest {
     }
 
     @Nested
-    class invalidMonthField {
+    class InvalidMonthField {
         @Test
         void shouldFailPayEmptyField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithEmptyMonth();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongFormat(),
@@ -129,6 +139,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayOneDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithOneDigitMonth();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongFormat(),
@@ -139,6 +150,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayTwoDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithDoubleZeroMonth();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongFormat(),
@@ -149,6 +161,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayThirteenMonthField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithThirteenMonth();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongValidity(),
@@ -158,10 +171,11 @@ public class CardPaymentTest {
     }
 
     @Nested
-    class invalidYearField {
+    class InvalidYearField {
         @Test
         void shouldFailPayEmptyField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithEmptyYear();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldWrongFormat(),
@@ -172,6 +186,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayOneDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithOneDigitYear();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldWrongFormat(),
@@ -182,6 +197,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayPastYearField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithPastYear();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldExpiredDate(),
@@ -192,6 +208,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayFarFutureYearField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithFutureYear();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldWrongValidity(),
@@ -201,10 +218,11 @@ public class CardPaymentTest {
     }
 
     @Nested
-    class invalidHolderField {
+    class InvalidHolderField {
         @Test
         void shouldFailPayEmptyField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithEmptyHolder();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldIsEmpty(),
@@ -215,6 +233,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayHolderInCyrillic() {
             var cardInfo = DataHelper.getInvalidCardInfoWithHolderInCyrillic();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldWrongFormat(),
@@ -225,6 +244,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayHolderInDigits() {
             var cardInfo = DataHelper.getInvalidCardInfoWithHolderInDigits();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldWrongFormat(),
@@ -235,6 +255,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayHolderInSymbols() {
             var cardInfo = DataHelper.getInvalidCardInfoWithHolderInSymbols();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldWrongFormat(),
@@ -244,10 +265,11 @@ public class CardPaymentTest {
     }
 
     @Nested
-    class invalidCVCField {
+    class InvalidCVCField {
         @Test
         void shouldFailPayEmptyField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithEmptyCVC();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
@@ -258,6 +280,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayOneDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithOneDigitCVC();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
@@ -268,6 +291,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayTwoDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithTwoDigitCVC();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
@@ -278,6 +302,7 @@ public class CardPaymentTest {
         @Test
         void shouldFailPayThreeDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithTripleZeroCVC();
+            mainPage.selectPayByCard();
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),

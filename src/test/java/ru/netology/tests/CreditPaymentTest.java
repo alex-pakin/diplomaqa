@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.*;
 import ru.netology.data.DataBaseHelper;
 import ru.netology.data.DataHelper;
+import ru.netology.pages.MainPage;
 import ru.netology.pages.PaymentPage;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -11,6 +12,7 @@ import static com.codeborne.selenide.Selenide.open;
 public class CreditPaymentTest {
 
     PaymentPage paymentPage = new PaymentPage();
+    MainPage mainPage = new MainPage();
 
     @BeforeEach
     void shouldStart() {
@@ -24,11 +26,12 @@ public class CreditPaymentTest {
     }
 
     @Nested
-    class mainPathsCardWithDifferentStatus {
+    class MainPathsCardWithDifferentStatus {
         @Test
         void shouldSuccessPayApprovedCard() {
             var cardInfo = DataHelper.getValidAcceptedCardInfo();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.approvedPayment(),
                     () -> paymentPage.creditApprovedStatus(),
@@ -39,7 +42,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayDeclinedCard() {
             var cardInfo = DataHelper.getValidDeclinedCardInfo();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.declinedPayment(),
                     () -> paymentPage.creditDeclinedStatus(),
@@ -49,11 +53,12 @@ public class CreditPaymentTest {
     }
 
     @Nested
-    class invalidCardNumberField{
+    class InvalidCardNumberField{
         @Test
         void shouldFailPayEmptyField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithEmptyNumber();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -63,7 +68,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayOneDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithOneDigitNumber();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -73,7 +79,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayThreeDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithThreeDigitNumber();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -83,7 +90,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayFifteenDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithFifteenDigitNumber();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -93,7 +101,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayUnregisteredCard() {
             var cardInfo = DataHelper.getInvalidCardInfoIfCardIsNotRegisteredInBase();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldRejectedPay(),
                     () -> paymentPage.creditDeclinedStatus(),
@@ -103,11 +112,12 @@ public class CreditPaymentTest {
     }
 
     @Nested
-    class invalidMonthField {
+    class InvalidMonthField {
         @Test
         void shouldFailPayEmptyField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithEmptyMonth();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -117,7 +127,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayOneDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithOneDigitMonth();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -127,7 +138,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayTwoDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithDoubleZeroMonth();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -137,7 +149,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayThirteenMonthField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithThirteenMonth();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongValidity(),
                     () -> paymentPage.creditDeclinedCount()
@@ -146,11 +159,12 @@ public class CreditPaymentTest {
     }
 
     @Nested
-    class invalidYearField {
+    class InvalidYearField {
         @Test
         void shouldFailPayEmptyField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithEmptyYear();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -160,7 +174,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayOneDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithOneDigitYear();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -170,7 +185,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayPastYearField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithPastYear();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldExpiredDate(),
                     () -> paymentPage.creditDeclinedCount()
@@ -180,7 +196,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayFarFutureYearField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithFutureYear();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldWrongValidity(),
                     () -> paymentPage.creditDeclinedCount()
@@ -189,11 +206,12 @@ public class CreditPaymentTest {
     }
 
     @Nested
-    class invalidHolderField {
+    class InvalidHolderField {
         @Test
         void shouldFailPayEmptyField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithEmptyHolder();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldIsEmpty(),
                     () -> paymentPage.creditDeclinedCount()
@@ -203,7 +221,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayHolderInCyrillic() {
             var cardInfo = DataHelper.getInvalidCardInfoWithHolderInCyrillic();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -213,7 +232,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayHolderInDigits() {
             var cardInfo = DataHelper.getInvalidCardInfoWithHolderInDigits();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -223,7 +243,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayHolderInSymbols() {
             var cardInfo = DataHelper.getInvalidCardInfoWithHolderInSymbols();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -232,11 +253,12 @@ public class CreditPaymentTest {
     }
 
     @Nested
-    class invalidCVCField {
+    class InvalidCVCField {
         @Test
         void shouldFailPayEmptyField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithEmptyCVC();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -246,7 +268,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayOneDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithOneDigitCVC();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -256,7 +279,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayTwoDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithTwoDigitCVC();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
@@ -266,7 +290,8 @@ public class CreditPaymentTest {
         @Test
         void shouldFailPayThreeDigitField() {
             var cardInfo = DataHelper.getInvalidCardInfoWithTripleZeroCVC();
-            paymentPage.fillFormPayByCredit(cardInfo);
+            mainPage.selectPayByCredit();
+            paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
                     () -> paymentPage.creditDeclinedCount()
