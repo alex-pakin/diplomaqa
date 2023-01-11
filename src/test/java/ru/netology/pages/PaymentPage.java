@@ -2,8 +2,6 @@ package ru.netology.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.Assertions;
-import ru.netology.data.DataBaseHelper;
 import ru.netology.data.DataHelper;
 
 import java.time.Duration;
@@ -15,8 +13,6 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class PaymentPage {
-
-    MainPage mainPage = new MainPage();
 
     private final SelenideElement numberField = $x("//*[.='Номер карты'] //input");
     private final SelenideElement monthField = $x("//*[.='Месяц'] //input");
@@ -89,54 +85,6 @@ public class PaymentPage {
 
     public void CVCFieldWrongFormat() {
         invalidFormat.shouldBe(Condition.text("Неверный формат"), visible);
-    }
-
-    public void cardApprovedStatus() {
-        String expected = "APPROVED";
-        String actual = DataBaseHelper.getPurchaseByCardStatus();
-        Assertions.assertEquals(expected,actual);
-    }
-
-    public void cardDeclinedStatus() {
-        String expected = "DECLINED";
-        String actual = DataBaseHelper.getPurchaseByCardStatus();
-        Assertions.assertEquals(expected,actual);
-    }
-
-    public void creditApprovedStatus() {
-        String expected = "APPROVED";
-        String actual = DataBaseHelper.getPurchaseByCreditStatus();
-        Assertions.assertEquals(expected,actual);
-    }
-
-    public void creditDeclinedStatus() {
-        String expected = "DECLINED";
-        String actual = DataBaseHelper.getPurchaseByCreditStatus();
-        Assertions.assertEquals(expected,actual);
-    }
-
-    public void cardApprovedCount() {
-        long expected = 1;
-        long actual = DataBaseHelper.getPurchaseByCardCount();
-        Assertions.assertEquals(expected,actual);
-    }
-
-    public void cardDeclinedCount() {
-        long expected = 0;
-        long actual = DataBaseHelper.getPurchaseByCardCount();
-        Assertions.assertEquals(expected,actual);
-    }
-
-    public void creditApprovedCount() {
-        long expected = 1;
-        long actual = DataBaseHelper.getPurchaseByCreditCount();
-        Assertions.assertEquals(expected,actual);
-    }
-
-    public void creditDeclinedCount() {
-        long expected = 0;
-        long actual = DataBaseHelper.getPurchaseByCreditCount();
-        Assertions.assertEquals(expected,actual);
     }
 
 }

@@ -6,6 +6,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import ru.netology.data.DataBaseHelper;
 import ru.netology.data.DataHelper;
+import ru.netology.data.DbAssertions;
 import ru.netology.pages.MainPage;
 import ru.netology.pages.PaymentPage;
 
@@ -15,6 +16,7 @@ public class CardPaymentTest {
 
     PaymentPage paymentPage = new PaymentPage();
     MainPage mainPage = new MainPage();
+    DbAssertions dbAssertions = new DbAssertions();
 
     @BeforeEach
     void shouldStart() {
@@ -46,8 +48,8 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.approvedPayment(),
-                    () -> paymentPage.cardApprovedStatus(),
-                    () -> paymentPage.cardApprovedCount()
+                    () -> dbAssertions.cardApprovedStatus(),
+                    () -> dbAssertions.cardApprovedCount()
             );
         }
 
@@ -58,8 +60,8 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.declinedPayment(),
-                    () -> paymentPage.cardDeclinedStatus(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedStatus(),
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
     }
@@ -73,7 +75,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -84,7 +86,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -95,7 +97,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -106,7 +108,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -117,8 +119,8 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldRejectedPay(),
-                    () -> paymentPage.cardDeclinedStatus(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedStatus(),
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
     }
@@ -132,7 +134,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -143,7 +145,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -154,7 +156,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -165,7 +167,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongValidity(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
     }
@@ -179,7 +181,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -190,7 +192,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -201,7 +203,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldExpiredDate(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -212,7 +214,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldWrongValidity(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
     }
@@ -226,7 +228,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldIsEmpty(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -237,7 +239,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -248,7 +250,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -259,7 +261,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
     }
@@ -273,7 +275,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -284,7 +286,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -295,7 +297,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
 
@@ -306,7 +308,7 @@ public class CardPaymentTest {
             paymentPage.fillFormPayByCard(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
-                    () -> paymentPage.cardDeclinedCount()
+                    () -> dbAssertions.cardDeclinedCount()
             );
         }
     }
