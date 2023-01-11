@@ -17,5 +17,5 @@
 ## Ссылки на документацию
 1. [Дипломное задание](https://github.com/netology-code/qa-diploma)
 2. [План автоматизации](https://github.com/alex-pakin/diplomaqa/blob/main/docs/Plan.md)
-3. [Отчет по итогам тестирования](https://github.com/alex-pakin/diplomaqa/blob/main/docs/Report.md.)
+3. [Отчет по итогам тестирования](https://github.com/alex-pakin/diplomaqa/blob/main/docs/Report.md)
 4. [Отчет по итогам автоматизации](https://github.com/alex-pakin/diplomaqa/blob/main/docs/Summary.md)
