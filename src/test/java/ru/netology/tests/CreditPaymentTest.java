@@ -1,7 +1,6 @@
 package ru.netology.tests;
 
 import com.codeborne.selenide.Configuration;
-import lombok.val;
 import org.junit.jupiter.api.*;
 import ru.netology.data.DataBaseHelper;
 import ru.netology.data.DataHelper;
@@ -28,7 +27,7 @@ public class CreditPaymentTest {
     class mainPathsCardWithDifferentStatus {
         @Test
         void shouldSuccessPayApprovedCard() {
-            val cardInfo = DataHelper.getValidAcceptedCardInfo();
+            var cardInfo = DataHelper.getValidAcceptedCardInfo();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.approvedPayment(),
@@ -39,7 +38,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayDeclinedCard() {
-            val cardInfo = DataHelper.getValidDeclinedCardInfo();
+            var cardInfo = DataHelper.getValidDeclinedCardInfo();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.declinedPayment(),
@@ -53,7 +52,7 @@ public class CreditPaymentTest {
     class invalidCardNumberField{
         @Test
         void shouldFailPayEmptyField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithEmptyNumber();
+            var cardInfo = DataHelper.getInvalidCardInfoWithEmptyNumber();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
@@ -63,7 +62,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayOneDigitField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithOneDigitNumber();
+            var cardInfo = DataHelper.getInvalidCardInfoWithOneDigitNumber();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
@@ -73,7 +72,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayThreeDigitField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithThreeDigitNumber();
+            var cardInfo = DataHelper.getInvalidCardInfoWithThreeDigitNumber();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
@@ -83,7 +82,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayFifteenDigitField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithFifteenDigitNumber();
+            var cardInfo = DataHelper.getInvalidCardInfoWithFifteenDigitNumber();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldWrongFormat(),
@@ -93,7 +92,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayUnregisteredCard() {
-            val cardInfo = DataHelper.getInvalidCardInfoIfCardIsNotRegisteredInBase();
+            var cardInfo = DataHelper.getInvalidCardInfoIfCardIsNotRegisteredInBase();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.numberFieldRejectedPay(),
@@ -107,7 +106,7 @@ public class CreditPaymentTest {
     class invalidMonthField {
         @Test
         void shouldFailPayEmptyField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithEmptyMonth();
+            var cardInfo = DataHelper.getInvalidCardInfoWithEmptyMonth();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongFormat(),
@@ -117,7 +116,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayOneDigitField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithOneDigitMonth();
+            var cardInfo = DataHelper.getInvalidCardInfoWithOneDigitMonth();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongFormat(),
@@ -127,7 +126,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayTwoDigitField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithDoubleZeroMonth();
+            var cardInfo = DataHelper.getInvalidCardInfoWithDoubleZeroMonth();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongFormat(),
@@ -137,7 +136,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayThirteenMonthField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithThirteenMonth();
+            var cardInfo = DataHelper.getInvalidCardInfoWithThirteenMonth();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.monthFieldWrongValidity(),
@@ -150,7 +149,7 @@ public class CreditPaymentTest {
     class invalidYearField {
         @Test
         void shouldFailPayEmptyField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithEmptyYear();
+            var cardInfo = DataHelper.getInvalidCardInfoWithEmptyYear();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldWrongFormat(),
@@ -160,7 +159,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayOneDigitField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithOneDigitYear();
+            var cardInfo = DataHelper.getInvalidCardInfoWithOneDigitYear();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldWrongFormat(),
@@ -170,7 +169,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayPastYearField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithPastYear();
+            var cardInfo = DataHelper.getInvalidCardInfoWithPastYear();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldExpiredDate(),
@@ -180,7 +179,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayFarFutureYearField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithFutureYear();
+            var cardInfo = DataHelper.getInvalidCardInfoWithFutureYear();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.yearFieldWrongValidity(),
@@ -193,7 +192,7 @@ public class CreditPaymentTest {
     class invalidHolderField {
         @Test
         void shouldFailPayEmptyField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithEmptyHolder();
+            var cardInfo = DataHelper.getInvalidCardInfoWithEmptyHolder();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldIsEmpty(),
@@ -203,7 +202,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayHolderInCyrillic() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithHolderInCyrillic();
+            var cardInfo = DataHelper.getInvalidCardInfoWithHolderInCyrillic();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldWrongFormat(),
@@ -213,7 +212,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayHolderInDigits() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithHolderInDigits();
+            var cardInfo = DataHelper.getInvalidCardInfoWithHolderInDigits();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldWrongFormat(),
@@ -223,7 +222,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayHolderInSymbols() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithHolderInSymbols();
+            var cardInfo = DataHelper.getInvalidCardInfoWithHolderInSymbols();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.holderFieldWrongFormat(),
@@ -236,7 +235,7 @@ public class CreditPaymentTest {
     class invalidCVCField {
         @Test
         void shouldFailPayEmptyField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithEmptyCVC();
+            var cardInfo = DataHelper.getInvalidCardInfoWithEmptyCVC();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
@@ -246,7 +245,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayOneDigitField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithOneDigitCVC();
+            var cardInfo = DataHelper.getInvalidCardInfoWithOneDigitCVC();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
@@ -256,7 +255,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayTwoDigitField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithTwoDigitCVC();
+            var cardInfo = DataHelper.getInvalidCardInfoWithTwoDigitCVC();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
@@ -266,7 +265,7 @@ public class CreditPaymentTest {
 
         @Test
         void shouldFailPayThreeDigitField() {
-            val cardInfo = DataHelper.getInvalidCardInfoWithTripleZeroCVC();
+            var cardInfo = DataHelper.getInvalidCardInfoWithTripleZeroCVC();
             paymentPage.fillFormPayByCredit(cardInfo);
             Assertions.assertAll(
                     () -> paymentPage.CVCFieldWrongFormat(),
