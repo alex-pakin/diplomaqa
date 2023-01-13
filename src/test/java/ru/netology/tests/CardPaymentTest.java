@@ -1,6 +1,5 @@
 package ru.netology.tests;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
@@ -20,7 +19,6 @@ public class CardPaymentTest {
 
     @BeforeEach
     void shouldStart() {
-        //Configuration.holdBrowserOpen = true;
         open("http://localhost:8080");
     }
 

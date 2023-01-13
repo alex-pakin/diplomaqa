@@ -2,6 +2,7 @@ package ru.netology.data;
 
 import org.junit.jupiter.api.Assertions;
 
+
 public class DbAssertions {
 
     public void cardApprovedStatus() {
