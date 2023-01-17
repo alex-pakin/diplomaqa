@@ -10,8 +10,8 @@
 - Для БД MySQL: **java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar ./artifacts/aqa-shop.jar**
 - Для БД PostgreSQL: **java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar ./artifacts/aqa-shop.jar**
 6. Запустить автотесты, выполнив в терминале Intellij IDEA команду:
-- Для БД MySQL: **./gradlew clean test -D dbUrl=jdbc:mysql://localhost:3306/app**
-- Для БД PostgreSQL: **./gradlew clean test -D dbUrl=jdbc:postgresql://localhost:5432/app**
+- Для БД MySQL: **./gradlew clean test -D db.Url=jdbc:mysql://localhost:3306/app**
+- Для БД PostgreSQL: **./gradlew clean test -D db.Url=jdbc:postgresql://localhost:5432/app**
 7. Для получения отчета в терминале IntelliJ IDEA выполнить команду **./gradlew allureServe**
 
 ## Ссылки на документацию
